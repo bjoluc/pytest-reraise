@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-reraise"
-version = "0.1.0"
+version = "1.0.0"
 description = "Make multi-threaded pytest test cases fail when they should"
 authors = ["bjoluc <mail@bjoluc.de>"]
 license = "MIT"
@@ -23,7 +23,7 @@ keywords = [
 reraise = "pytest_reraise.reraise"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.4"
 typing = { version = "^3.7", python = "<3.5" } # typing is required for Python < 3.5
 
 [tool.poetry.dev-dependencies]

@@ -8,3 +8,13 @@ install: pip install poetry tox tox-travis codecov
 script: tox --recreate
 after_success:
   - codecov
+jobs:
+  include:
+    - stage: release
+      if: branch = master
+      python: "3.8"
+      script: skip # Skip the tests this time
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: poetry run python release.py --publish

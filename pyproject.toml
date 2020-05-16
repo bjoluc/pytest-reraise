@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-reraise"
-version = "1.0.0"
+version = "0.1.0"
 description = "Make multi-threaded pytest test cases fail when they should"
 authors = ["bjoluc <mail@bjoluc.de>"]
 license = "MIT"
@@ -39,8 +39,9 @@ branch = true
 include = ["pytest_reraise/*", "tests/*"]
 
 [tool.commitizen]
-version = "1.0.0"
+version = "0.1.0"
 version_files = ["pytest_reraise/__init__.py", "pyproject.toml:version"]
+bump_message = "chore(Release): Release $new_version [skip-ci]"
 
 [build-system]
 requires = ["poetry>=0.12"]

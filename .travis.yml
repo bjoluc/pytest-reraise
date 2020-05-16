@@ -15,6 +15,5 @@ jobs:
       python: "3.8"
       script: skip # Skip the tests this time
       deploy:
-        skip_cleanup: true
         provider: script
-        script: poetry run python release.py --publish
+        script: poetry install && poetry run python release.py --publish

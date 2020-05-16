@@ -6,7 +6,7 @@ from typing import Union
 class Reraise:
     def __init__(self):
         self._catch = False
-        self._exception: Exception = None
+        self._exception = None
         self._origin = self
 
     def __enter__(self):

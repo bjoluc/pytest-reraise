@@ -1,12 +1,14 @@
 import pytest
 from pytest import Item
 from typing import Union
+from threading import Lock
 
 
 class Reraise:
     def __init__(self):
         self._catch = False
         self._exception = None
+        self._exception_lock = Lock()
         self._origin = self
 
     def __enter__(self):
@@ -22,7 +24,8 @@ class Reraise:
         """
         The exception that has been captured by this `Reraise` instance, if any.
         """
-        return self._origin._exception
+        with self._origin._exception_lock:
+            return self._origin._exception
 
     @exception.setter
     def exception(self, e: Exception):
@@ -30,17 +33,21 @@ class Reraise:
         Set the exception that this `Reraise` instance raises, if no exception has been
         captured or set yet.
         """
-        if self._origin._exception is None:
-            self._origin._exception = e
+        origin = self._origin
+        with origin._exception_lock:
+            if origin._exception is None:
+                origin._exception = e
 
     def reset(self):
         """
         Resets the exception that was previously captured, if any, and returns it.
         """
-        if self.exception is not None:
-            e = self.exception
-            self._origin._exception = None
-            return e
+        origin = self._origin
+        with origin._exception_lock:
+            if origin._exception is not None:
+                e = origin._exception
+                origin._exception = None
+                return e
 
     def __call__(self, catch: bool = None) -> Union["Reraise", None]:
         """

@@ -20,7 +20,7 @@ def test_assert():
 ```
 
 This test will pass, as the `AssertionError` is not raised in the main thread.
-`pytest-reraise` is here to help you catch the exception and raise it in the main thread:
+`pytest-reraise` is here to help you capture the exception and raise it in the main thread:
 
 ```sh
 pip install pytest-reraise
@@ -102,9 +102,9 @@ Note that you cannot use `reraise()` (without the `catch` argument) as a context
 
 ### Exception Priority
 
-Any exception that is captured by the `reraise` context manager will take precedence over exceptions from the main thread, and hence hide them.
+If `reraise` captures an exception and the main thread raises an exception as well, the exception captured by `reraise` will mask the main thread's exception unless that exception was already re-raised.
 The objective behind this is that the outcome of the main thread often depends on the work performed in other threads.
-Thus, failures in in other threads are likely to cause failures in the main thread, and other threads' exceptions are of greater importance for the developer.
+Thus, failures in in other threads are likely to cause failures in the main thread, and other threads' exceptions (if any) are of greater importance for the developer than main thread exceptions.
 
 The example below will report `assert False`, not `assert "foo" == "bar"`.
 

@@ -7,9 +7,9 @@ from threading import Lock
 class Reraise:
     def __init__(self):
         self._catch = False
+        self._origin = self
         self._exception = None
         self._exception_lock = Lock()
-        self._origin = self
 
     def __enter__(self):
         return None
@@ -36,6 +36,7 @@ class Reraise:
         origin = self._origin
         with origin._exception_lock:
             if origin._exception is None:
+                e._is_from_pytest_reraise = True  # Annotate the exception
                 origin._exception = e
 
     def reset(self):
@@ -76,14 +77,23 @@ def reraise():
     reraise = Reraise()
     yield reraise
     # If `reraise` has captured an exception during the teardown phase, it was not
-    # handled by the pytest_runtest_call wrapper.
+    # handled by the pytest_runtest_call wrapper anymore.
     reraise()
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_call(item: Item):
-    yield
-    # If an exception was captured, override any exception in the main thread by
-    # re-raising the captured exception
+    result = yield
     if "reraise" in item.funcargs:
-        item.funcargs["reraise"]()
+        reraise = item.funcargs["reraise"]
+
+        # Override any non-re-raised exception in the main thread by calling `reraise()`
+        if result.excinfo is None or not hasattr(
+            result.excinfo[1], "_is_from_pytest_reraise"
+        ):
+            reraise()
+        else:
+            # The test case re-raised an exception already, so we don't mask it by
+            # re-raising any other exception captured since then. If anything, we drop
+            # any other exception so it will not be raised in the teardown phase.
+            reraise.reset()

@@ -48,7 +48,10 @@ def test_in_nested_fixture(result):
 
 
 def test_exception_access(result):
-    result.assert_outcomes(passed=1)
+    result.assert_outcomes(passed=1, failed=1)
+    result.stdout.re_match_lines_random(
+        ["FAILED .*:test_manual_reraise_precedence - Exception: A"],
+    )
 
 
 def test_catching(result):

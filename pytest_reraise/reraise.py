@@ -1,7 +1,8 @@
+from threading import Lock
+from typing import Union
+
 import pytest
 from pytest import Item
-from typing import Union
-from threading import Lock
 
 
 class Reraise:

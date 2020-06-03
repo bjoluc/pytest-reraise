@@ -8,7 +8,16 @@ readme = 'readme.md'
 homepage = "https://github.com/bjoluc/pytest-reraise"
 repository = "https://github.com/bjoluc/pytest-reraise"
 documentation = "https://github.com/bjoluc/pytest-reraise#readme"
-classifiers = ["Framework :: Pytest"]
+classifiers = [
+    "Framework :: Pytest",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Topic :: Software Development :: Libraries",
+    "Intended Audience :: Developers",
+    "Typing :: Typed"
+]
 keywords = [
     'pytest',
     'plugin',

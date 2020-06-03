@@ -1,6 +1,12 @@
 
 
 
+## 1.0.3 (2020-06-03)
+
+### Fix
+
+- **Packaging**: Add missing classifiers
+
 ## 1.0.2 (2020-06-03)
 
 ### Refactor

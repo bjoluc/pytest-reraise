@@ -1,7 +1,7 @@
 # pytest-reraise
 
 [![PyPI version fury.io](https://badge.fury.io/py/pytest-reraise.svg)](https://pypi.python.org/pypi/pytest-reraise/)
-[![Build Status](https://travis-ci.org/bjoluc/pytest-reraise.svg?branch=master)](https://travis-ci.org/bjoluc/pytest-reraise)
+[![Build Status](https://travis-ci.com/bjoluc/pytest-reraise.svg?branch=master)](https://travis-ci.com/bjoluc/pytest-reraise)
 [![codecov](https://codecov.io/gh/bjoluc/pytest-reraise/branch/master/graph/badge.svg)](https://codecov.io/gh/bjoluc/pytest-reraise)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pytest-reraise.svg)](https://pypi.python.org/pypi/pytest-reraise/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)

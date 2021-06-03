@@ -1,10 +1,12 @@
 # pytest-reraise
 
-[![PyPI version fury.io](https://badge.fury.io/py/pytest-reraise.svg)](https://pypi.python.org/pypi/pytest-reraise/)
-[![Build Status](https://travis-ci.com/bjoluc/pytest-reraise.svg?branch=master)](https://travis-ci.com/bjoluc/pytest-reraise)
-[![codecov](https://codecov.io/gh/bjoluc/pytest-reraise/branch/master/graph/badge.svg)](https://codecov.io/gh/bjoluc/pytest-reraise)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/pytest-reraise.svg)](https://pypi.python.org/pypi/pytest-reraise/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PyPI](https://img.shields.io/pypi/v/pytest-reraise)](https://pypi.python.org/pypi/pytest-reraise/)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bjoluc/pytest-reraise/build)](https://github.com/bjoluc/pytest-reraise/actions)
+[![codecov](https://codecov.io/gh/bjoluc/pytest-reraise/branch/main/graph/badge.svg)](https://codecov.io/gh/bjoluc/pytest-reraise)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/pytest-reraise)](https://pypi.python.org/pypi/pytest-reraise/)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/pytest-reraise)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079)](https://github.com/bjoluc/semantic-release-config-poetry)
 
 Let's assume you write a pytest test case that includes assertions in another thread, like so:
 

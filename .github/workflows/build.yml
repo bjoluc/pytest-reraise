@@ -9,20 +9,20 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9] # "pypy-3.7" not included due to https://github.com/python/typed_ast/issues/126
+        pytest-version: [46, 53, 60, 61, 62] # according to the environments specified in tox.ini
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Poetry and Tox
-        run: pip install poetry==1.1.6 tox==3.23.1
+      - name: Install Poetry
+        run: pip install poetry==1.1.6
+      - name: Install dependencies using Poetry
+        run: poetry install
       - name: Run Tox
-        run: tox -e py -e flake8
-      - name: Install coverage.py globally so that codecov can find it
-        run: pip install coverage==5.2
-      - uses: codecov/codecov-action@v1
-        with:
-          fail_ci_if_error: true
+        run: poetry run tox -e py-pytest${{ matrix.pytest-version }} -e flake8
+      - name: Upload coverage
+        run: poetry run codecov
   release:
     name: Release
     runs-on: ubuntu-latest

@@ -1,4 +1,4 @@
-__version__ = "1.0.3"
+__version__ = "2.0.0"
 
 from pytest_reraise import reraise
 from pytest_reraise.reraise import Reraise

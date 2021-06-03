@@ -1,5 +1,23 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.0](https://github.com/bjoluc/pytest-reraise/compare/v1.0.3...v2.0.0) (2021-06-03)
 
 
+### ⚠ BREAKING CHANGES
+
+* Python 3.5 is no longer officially supported.
+
+### Bug Fixes
+
+* Do not rewrite assertions in `pytest_reraise.reraise` ([620f1a0](https://github.com/bjoluc/pytest-reraise/commit/620f1a0232e5a855908755948106526a6b4694a7))
+
+
+### Continuous Integration
+
+* Run tests against a set of pytest versions ([913f22b](https://github.com/bjoluc/pytest-reraise/commit/913f22b8c69d259b5c5d16a9d9625be927ebbc35))
 
 ## 1.0.3 (2020-06-03)
 

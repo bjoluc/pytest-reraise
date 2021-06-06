@@ -66,7 +66,7 @@ def test_assert(reraise):
     reraise() # This will raise the assertion error
 ```
 
-As seen in the example above, `reraise()` can be called multiple times during a test case. Whenever an exception has been raised in a `with reraise` block since the last call, it will by raised on the next call.
+As seen in the example above, `reraise()` can be called multiple times during a test case. Whenever an exception has been raised in a `with reraise` block since the last call, it will be raised on the next call.
 
 ### Multiple Exceptions
 

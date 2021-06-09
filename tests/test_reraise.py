@@ -28,11 +28,13 @@ def test_no_exception(recorder: HookRecorder):
 
 
 def test_single_exception(recorder: HookRecorder):
-    recorder.assertoutcome(failed=2)
+    recorder.assertoutcome(failed=4)
 
     failures = recorder.getfailures()
     assert_failure_contains("test_reraise", failures[0], "assert False")
-    assert_failure_contains("test_exception", failures[1], "assert False")
+    assert_failure_contains("test_reraise_wrap", failures[1], "assert False")
+    assert_failure_contains("test_reraise_wrap_decorator", failures[2], "assert False")
+    assert_failure_contains("test_exception", failures[3], "assert False")
 
 
 def test_multiple_exceptions(recorder: HookRecorder):

@@ -1,8 +1,12 @@
+from functools import wraps
 from threading import Lock
-from typing import Union
+from typing import Any, Callable, TypeVar, Union
 
 import pytest
 from pytest import Item
+
+# TypeVar for the `func` parameter of the `Reraise.wrap()` method
+F = TypeVar("F", bound=Callable[..., Any])
 
 
 class Reraise:
@@ -71,6 +75,43 @@ class Reraise:
             child._catch = catch
             child._origin = self._origin
             return child
+
+    def wrap(self, func: F) -> F:
+        """
+        Wraps the provided function in a `reraise` context manager and returns the
+        resulting wrapper function.
+
+        Example:
+        ```python
+        def run():
+            with reraise:
+                assert False
+
+        Thread(target=run).start()
+        ```
+        can be written as
+        ```python
+        def run():
+            assert False
+
+        Thread(target=reraise.wrap(run)).start()
+        ```
+        or
+        ```python
+        @reraise.wrap
+        def run():
+            assert False
+
+        Thread(target=run).start()
+        ```
+        """
+
+        @wraps(func)
+        def wrapped(*args, **kwargs):
+            with self:
+                return func(*args, **kwargs)
+
+        return wrapped
 
 
 @pytest.fixture

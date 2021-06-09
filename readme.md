@@ -44,6 +44,33 @@ The above test will fail, as `pytest-reraise` captures the exception and raises 
 
 ## Advanced Usage and Special Cases
 
+### Wrapping Functions
+
+Instead of using the `reraise` context manager in a function, you can also wrap the entire function with it via the `reraise.wrap()` method.
+Hence, the example
+```python
+def run():
+    with reraise:
+        assert False
+
+Thread(target=run).start()
+```
+can also be written as
+```python
+def run():
+    assert False
+
+Thread(target=reraise.wrap(run)).start()
+```
+or even
+```python
+@reraise.wrap
+def run():
+    assert False
+
+Thread(target=run).start()
+```
+
 ### Manual Re-raising
 
 By default, the captured exception (if any) is raised at the end of the test case.

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/bjoluc/pytest-reraise/compare/v2.0.0...v2.1.0) (2021-06-09)
+
+
+### Features
+
+* Introduce `reraise.wrap()` method to simplify function wrapping ([f245ffd](https://github.com/bjoluc/pytest-reraise/commit/f245ffdcaf667936c3a9265b1469690fc87bf4eb))
+
 ## [2.0.0](https://github.com/bjoluc/pytest-reraise/compare/v1.0.3...v2.0.0) (2021-06-03)
 
 

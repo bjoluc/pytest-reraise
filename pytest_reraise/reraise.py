@@ -126,7 +126,7 @@ def reraise():
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_call(item: Item):
     result = yield
-    if "reraise" in item.funcargs:
+    if hasattr(item, "funcargs") and "reraise" in item.funcargs:
         reraise = item.funcargs["reraise"]
 
         # Override any non-re-raised exception in the main thread by calling `reraise()`

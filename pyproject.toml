@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-reraise"
-version = "2.1.0"
+version = "2.1.1"
 description = "Make multi-threaded pytest test cases fail when they should"
 authors = ["bjoluc <mail@bjoluc.de>"]
 license = "MIT"

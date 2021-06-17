@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.1.1](https://github.com/bjoluc/pytest-reraise/compare/v2.1.0...v2.1.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* **Plugin:** Prevent an `AttributeError` when pytest-reraise is used alongside non-test plugins like pytest-black or pytest-flake8. Thanks [@jcpunk](https://github.com/jcpunk)! ([adadd8a](https://github.com/bjoluc/pytest-reraise/commit/adadd8aee2e159cb052c00ccd82802f0ab9a2e27))
+
 ## [2.1.0](https://github.com/bjoluc/pytest-reraise/compare/v2.0.0...v2.1.0) (2021-06-09)
 
 

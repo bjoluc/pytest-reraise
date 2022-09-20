@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/bjoluc/pytest-reraise/compare/v2.1.1...v2.1.2) (2022-09-20)
+
+
+### Bug Fixes
+
+* Add missing `py.typed` file for mypy ([#5](https://github.com/bjoluc/pytest-reraise/issues/5)) ([aa5b793](https://github.com/bjoluc/pytest-reraise/commit/aa5b7932d0adb81f0a6f1afaf34418ba14083258))
+
 ### [2.1.1](https://github.com/bjoluc/pytest-reraise/compare/v2.1.0...v2.1.1) (2021-06-17)
 
 

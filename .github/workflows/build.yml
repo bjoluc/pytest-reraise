@@ -7,35 +7,51 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9] # "pypy-3.7" not included due to https://github.com/python/typed_ast/issues/126
-        pytest-version: [46, 53, 60, 61, 62] # according to the environments specified in tox.ini
+      matrix: # according to the environments specified in tox.ini
+        # Python 3.6 is no longer included here since Poetry fails to resolve transient dependencies
+        # on `poetry install` and I wasn't able to figure out a clean solution to it. The local tox
+        # environments for Python 3.6 still work.
+        python-version: [3.7, 3.8, 3.9, "3.10"]
+        pytest-version: [46, 53, 60, 61, 62, 70, 71]
+        exclude:
+          - python-version: "3.10"
+            pytest-version: 46
+          - python-version: "3.10"
+            pytest-version: 53
+          - python-version: "3.10"
+            pytest-version: 60
+          - python-version: "3.10"
+            pytest-version: 61
+          - python-version: "3.10"
+            pytest-version: 62
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Poetry
-        run: pip install poetry==1.1.6
+        run: pip install "poetry<=1.2.1" # Install the latest available version of Poetry for the respective Python version
       - name: Install dependencies using Poetry
         run: poetry install
       - name: Run Tox
         run: poetry run tox -e py-pytest${{ matrix.pytest-version }} -e flake8
+      - name: Prepare coverage data
+        run: poetry run coverage xml
       - name: Upload coverage
-        run: poetry run codecov
+        uses: codecov/codecov-action@v3
   release:
     name: Release
     runs-on: ubuntu-latest
     needs: test
     if: github.repository_owner == 'bjoluc' && github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: 3.8
+          python-version: "3.10"
       - name: Install poetry
-        run: pip install poetry==1.1.6
-      - uses: bjoluc/semantic-release-config-poetry@v1
+        run: pip install poetry==1.2.1
+      - uses: bjoluc/semantic-release-config-poetry@v2
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}

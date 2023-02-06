@@ -1,14 +1,14 @@
 # pytest-reraise
 
 [![PyPI](https://img.shields.io/pypi/v/pytest-reraise)](https://pypi.python.org/pypi/pytest-reraise/)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bjoluc/pytest-reraise/build)](https://github.com/bjoluc/pytest-reraise/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bjoluc/pytest-reraise/build.yml)](https://github.com/bjoluc/pytest-reraise/actions)
 [![codecov](https://codecov.io/gh/bjoluc/pytest-reraise/branch/main/graph/badge.svg)](https://codecov.io/gh/bjoluc/pytest-reraise)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pytest-reraise)](https://pypi.python.org/pypi/pytest-reraise/)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pytest-reraise)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079)](https://github.com/bjoluc/semantic-release-config-poetry)
 
-Let's assume you write a pytest test case that includes assertions in another thread, like so:
+Let's assume you are writing a pytest test case that includes assertions in another thread, roughly like this:
 
 ```python
 from threading import Thread
@@ -21,7 +21,7 @@ def test_assert():
     Thread(target=run).start()
 ```
 
-This test will pass, as the `AssertionError` is not raised in the main thread.
+This test will pass as the `AssertionError` is not raised in the main thread.
 `pytest-reraise` is here to help you capture the exception and raise it in the main thread:
 
 ```sh
@@ -40,7 +40,7 @@ def test_assert(reraise):
     Thread(target=run).start()
 ```
 
-The above test will fail, as `pytest-reraise` captures the exception and raises it at the end of the test case.
+The above test will fail as `pytest-reraise` captures the exception and raises it at the end of the test case.
 
 ## Advanced Usage and Special Cases
 
@@ -48,6 +48,7 @@ The above test will fail, as `pytest-reraise` captures the exception and raises 
 
 Instead of using the `reraise` context manager in a function, you can also wrap the entire function with it via the `reraise.wrap()` method.
 Hence, the example
+
 ```python
 def run():
     with reraise:
@@ -55,14 +56,18 @@ def run():
 
 Thread(target=run).start()
 ```
+
 can also be written as
+
 ```python
 def run():
     assert False
 
 Thread(target=reraise.wrap(run)).start()
 ```
+
 or even
+
 ```python
 @reraise.wrap
 def run():
